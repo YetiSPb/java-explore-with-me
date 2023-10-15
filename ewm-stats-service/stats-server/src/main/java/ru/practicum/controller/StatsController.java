@@ -3,6 +3,7 @@ package ru.practicum.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.EndpointHitDto;
 import ru.practicum.ViewStatsDto;
@@ -24,6 +25,7 @@ public class StatsController {
     }
 
     @PostMapping("/hit")
+    @ResponseStatus(HttpStatus.CREATED)
     public EndpointHitDto addHit(@RequestBody EndpointHitDto dto) {
         log.info("Received a POST request to create a hit of {}", dto.toString());
         return service.addHit(dto);
