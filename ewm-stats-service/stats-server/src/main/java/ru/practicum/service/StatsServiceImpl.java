@@ -21,9 +21,10 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
-    public void addHit(EndpointHitDto dto) {
+    public EndpointHitDto addHit(EndpointHitDto dto) {
         EndpointHit hit = HitMapper.mapToHit(dto);
         statsRepository.save(hit);
+        return HitMapper.mapToHitDto(hit);
     }
 
     @Override
