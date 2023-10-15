@@ -32,9 +32,9 @@ public class StatsController {
     @GetMapping("/stats")
     public List<ViewStatsDto> searchStats(@RequestParam(defaultValue = "false") boolean unique,
                                           @RequestParam(name = "start") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-                                        LocalDateTime start,
+                                          LocalDateTime start,
                                           @RequestParam(name = "end") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-                                        LocalDateTime end,
+                                          LocalDateTime end,
                                           @RequestParam(required = false) List<String> uris) {
         log.info("Received a GET request to find stats with unique={}, start={}, end={}, uris={}", unique,
                 start.toString(), end.toString(), uris);
