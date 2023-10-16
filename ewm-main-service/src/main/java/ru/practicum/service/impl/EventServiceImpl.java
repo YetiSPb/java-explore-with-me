@@ -338,7 +338,7 @@ public class EventServiceImpl implements EventService {
                 event.setState(EventState.CANCELED);
                 break;
             case REJECT_EVENT:
-                if (event.getState().equals(EventState.PUBLISHED)) {
+                if (event.getState() == EventState.PUBLISHED) {
                     throw new DataConflictException("The event is already published");
                 }
                 event.setState(EventState.CANCELED);
