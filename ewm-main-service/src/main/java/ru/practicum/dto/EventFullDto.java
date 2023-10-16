@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 public class EventFullDto {
     private Long id;
 
-    @NotNull
     @NotEmpty
     @NotBlank
     @Length(min = 20, max = 2000)
@@ -33,7 +32,6 @@ public class EventFullDto {
 
     private int confirmedRequests;
 
-    @NotNull
     @NotEmpty
     @NotBlank
     @Length(min = 20, max = 7000)
