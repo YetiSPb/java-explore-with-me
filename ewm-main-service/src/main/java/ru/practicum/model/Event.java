@@ -25,7 +25,7 @@ public class Event {
 
     private String annotation;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "initiator_id", nullable = false)
     @ToString.Exclude
     private User initiator;
