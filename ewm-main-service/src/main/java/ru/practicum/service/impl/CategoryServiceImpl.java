@@ -48,7 +48,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto patchCategory(Integer catId, CategoryDto dto) {
         Category category = checkCatId(catId);
-        category.setName(dto.getName());
+        if (dto.getName().length() >= 1 && dto.getName().length() <= 50) {
+            category.setName(dto.getName());
+        } else {
+            throw new ValidationException("The name of the category should be between 1 to 50 characters");
+        }
+
         return CategoryMapper.mapToDto(categoryRepository.save(category));
     }
 
