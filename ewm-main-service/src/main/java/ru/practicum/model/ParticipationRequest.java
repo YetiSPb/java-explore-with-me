@@ -28,7 +28,7 @@ public class ParticipationRequest {
     @ToString.Exclude
     private Event event;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "requester_id")
     @ToString.Exclude
     private User requester;
