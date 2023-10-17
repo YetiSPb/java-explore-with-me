@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
@@ -17,11 +18,11 @@ public class UserDto {
     @NotBlank
     @NotNull
     @Email
-    @Length(min = 6, max = 254)
+    @Size(min = 6, max = 254)
     private String email;
 
     @NotBlank
     @NotNull
-    @Length(min = 2, max = 250)
+    @Size(min = 2, max = 250)
     private String name;
 }

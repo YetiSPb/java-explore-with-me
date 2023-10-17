@@ -11,6 +11,7 @@ import ru.practicum.model.EventState;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,7 +23,7 @@ public class EventFullDto {
 
     @NotEmpty
     @NotBlank
-    @Length(min = 20, max = 2000)
+    @Size(min = 20, max = 2000)
     private String annotation;
 
     private UserShortDto initiator;
@@ -34,7 +35,7 @@ public class EventFullDto {
 
     @NotEmpty
     @NotBlank
-    @Length(min = 20, max = 7000)
+    @Size(min = 20, max = 7000)
     private String description;
 
     @NotNull
@@ -49,7 +50,7 @@ public class EventFullDto {
     private Boolean requestModeration;
 
     @NotNull
-    @Length(min = 3, max = 120)
+    @Size(min = 3, max = 120)
     private String title;
 
     private EventState state;
