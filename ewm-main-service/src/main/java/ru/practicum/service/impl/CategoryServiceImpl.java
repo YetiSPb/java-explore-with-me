@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.dto.CategoryDto;
 import ru.practicum.exception.DataNotFoundException;
-import ru.practicum.exception.ValidationException;
 import ru.practicum.mapper.CategoryMapper;
 import ru.practicum.model.Category;
 import ru.practicum.repository.CategoryRepository;
@@ -48,11 +47,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto patchCategory(Integer catId, CategoryDto dto) {
         Category category = checkCatId(catId);
-        if (dto.getName().length() >= 1 && dto.getName().length() <= 50) {
-            category.setName(dto.getName());
-        } else {
-            throw new ValidationException("The name of the category should be between 1 to 50 characters");
-        }
+
+        category.setName(dto.getName());
 
         return CategoryMapper.mapToDto(categoryRepository.save(category));
     }

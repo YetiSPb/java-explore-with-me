@@ -9,6 +9,7 @@ import ru.practicum.dto.CategoryDto;
 import ru.practicum.service.CategoryService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 @RestController
 @RequestMapping("/admin/categories")
@@ -40,7 +41,7 @@ public class AdminCategoryController {
     @PatchMapping("/{catId}")
     @ResponseStatus(HttpStatus.OK)
     public CategoryDto patchCategory(@PathVariable Integer catId,
-                                     @RequestBody CategoryDto dto) {
+                                     @Valid @RequestBody CategoryDto dto) {
         log.info("Received PATCH request to patch a category by id {} with the new name {}", catId, dto.getName());
         return categoryService.patchCategory(catId, dto);
     }
