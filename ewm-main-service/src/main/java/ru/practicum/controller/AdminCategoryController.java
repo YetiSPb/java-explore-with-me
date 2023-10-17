@@ -9,7 +9,6 @@ import ru.practicum.dto.CategoryDto;
 import ru.practicum.service.CategoryService;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 
 @RestController
 @RequestMapping("/admin/categories")
