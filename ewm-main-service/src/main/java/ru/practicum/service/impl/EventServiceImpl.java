@@ -146,11 +146,10 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventShortDto> searchAllEventsForPublic(String text, List<Integer> categories, Boolean paid,
-                                                        LocalDateTime rangeStart, LocalDateTime rangeEnd,
-                                                        Boolean onlyAvailable, String sort, Integer from, Integer size,
-                                                        HttpServletRequest request) {
-        Pageable page = PageRequest.of(from / size, size);
+    public List<EventShortDto> searchAllEventsForPublic(SearchEventParams params, Pageable page, HttpServletRequest request) {
+        LocalDateTime rangeStart = params.getRangeStart();
+        LocalDateTime rangeEnd = params.getRangeEnd();
+        String sort = params.getSort();
         if (rangeStart == null) {
             rangeStart = LocalDateTime.now();
         }
@@ -160,8 +159,8 @@ public class EventServiceImpl implements EventService {
         if (rangeStart.isAfter(rangeEnd)) {
             throw new ValidationException("The start of the event cannot be after the end of the event");
         }
-        List<Event> events = eventRepository.findEventsForPublic(text, categories, paid, rangeStart, rangeEnd,
-                onlyAvailable, page);
+        List<Event> events = eventRepository.findEventsForPublic(params.getText(), params.getCategories(),
+                params.getPaid(), rangeStart, rangeEnd, params.getOnlyAvailable(), page);
         if (sort != null && sort.equals("EVENT_DATE")) {
             events = events.stream()
                     .sorted(Comparator.comparing(Event::getEventDate))
@@ -197,7 +196,7 @@ public class EventServiceImpl implements EventService {
     private void setViews(Event event) {
         String start = event.getCreatedOn().format(FORMATTER);
         String end = LocalDateTime.now().format(FORMATTER);
-        List<ViewStatsDto> stats = statsClient.findStats(start, end, true, List.of("/events/" + event.getId()));
+        List<ViewStatsDto> stats = statsClient.searchStats(start, end, true, List.of("/events/" + event.getId()));
         if (stats.size() == 0) {
             event.setViews(0);
         } else {
