@@ -36,7 +36,7 @@ public class StatsClient {
         rest.exchange("/hit", HttpMethod.POST, entity, Object.class).getStatusCodeValue();
     }
 
-    public List<ViewStatsDto> findStats(String start, String end, Boolean unique, List<String> uris) {
+    public List<ViewStatsDto> searchStats(String start, String end, Boolean unique, List<String> uris) {
         Map<String, Object> parameters = Map.of(
                 "start", start,
                 "end", end,
